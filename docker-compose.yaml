@@ -1,0 +1,47 @@
+services:
+  fastapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fastapi-app
+    restart: always
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mysql
+    environment:
+      - DATABASE_URL=mysql+mysqlconnector://fastapi:fastapi@mysql:3306/fastapi
+    volumes:
+      - ./src:/app/src
+    command: uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
+
+  mysql:
+    image: mysql:8.0.33
+    container_name: fastapi-mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_USER: rootuser
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: fastapi
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - mysqldb:/var/lib/mysql
+
+  pma:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: fastapi-phpmyadmin
+    ports:
+      - "8888:80"
+    volumes:
+      - pma-session-store:/sessions
+    environment:
+      - PMA_HOST=${DB_HOST:-mysql}
+      - PMA_USER=${DB_USERNAME:-rootuser}
+      - PMA_PASSWORD=${DB_PASSWORD:-root}
+    depends_on:
+      - mysql
+volumes:
+  mysqldb:
+  pma-session-store:

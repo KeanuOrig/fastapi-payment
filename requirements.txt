@@ -1,0 +1,23 @@
+# Core FastAPI and dependencies
+fastapi==0.115.6
+uvicorn==0.32.1
+pydantic==2.10.3
+starlette==0.41.3
+
+# SQLAlchemy and database-related dependencies
+SQLAlchemy==1.4.31
+mysql-connector-python==9.1.0
+alembic==1.7.6
+
+# Miscellaneous helpers and utilities
+python-dotenv==1.0.1
+python-multipart==0.0.19
+email_validator==2.2.0
+rich==13.9.4
+
+# HTTP requests (optional if used)
+httpx==0.28.0
+
+# Optional, improves performance
+uvloop==0.21.0
+watchfiles==1.0.0

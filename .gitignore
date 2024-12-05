@@ -1,0 +1,57 @@
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__
+*.pycache
+*.log
+*.db
+*.sqlite3
+
+# Virtual environment
+venv/
+env/
+*.env
+
+# FastAPI specific
+*.pydantic_cache/
+
+# SQLAlchemy
+*.db
+*.sqlite3
+
+# Docker
+*.dockerfile
+docker-compose.override.yml
+*.env
+
+# Alembic
+alembic/versions/
+*.log
+
+# MySQL data
+mysql_data/
+
+# pytest
+.cache/
+*.pytest_cache/
+*.coveragerc
+coverage.xml
+
+# VSCode
+.vscode/
+
+# PyCharm
+.idea/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# JetBrains
+.idea/
+
+# Other ignored files
+*.swp
