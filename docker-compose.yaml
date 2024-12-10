@@ -8,14 +8,14 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      - mysql
+      - fastsql
     environment:
-      - DATABASE_URL=mysql+mysqlconnector://fastapi:fastapi@mysql:3306/fastapi
+      - DATABASE_URL=mysql+mysqlconnector://rootuser:root@fastsql:3306/fastapi
     volumes:
       - ./src:/app/src
     command: uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
 
-  mysql:
+  fastsql:
     image: mysql:8.0.33
     container_name: fastapi-mysql
     restart: always
@@ -37,11 +37,11 @@ services:
     volumes:
       - pma-session-store:/sessions
     environment:
-      - PMA_HOST=${DB_HOST:-mysql}
+      - PMA_HOST=${DB_HOST:-fastsql}
       - PMA_USER=${DB_USERNAME:-rootuser}
       - PMA_PASSWORD=${DB_PASSWORD:-root}
     depends_on:
-      - mysql
+      - fastsql
 volumes:
   mysqldb:
   pma-session-store:
